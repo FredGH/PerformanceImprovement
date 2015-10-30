@@ -450,10 +450,11 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    //As the .randomPizzaContainer size and size are constants, no need to loop
+    var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[0], size);
+    for (var i = 0; i < document.getElementsByClassName(".randomPizzaContainer").length; i++) {
+      var newwidth = (document.getElementsByClassName(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+      document.getElementsByClassName(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
 
@@ -502,10 +503,23 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  // using  'console.log("Phase: " + phase );' in the original loop
+  // shows that in  the variable phase repeats the same values many times.
+  // It is cheaper to load these values into an array and get read from the array
+  // It is faster and lower the memory foot print
+  // Phase: 0.4226466415713652
+  // Phase: 0.9909775248482073
+  // Phase: 0.6482082419066111
+  // Phase: -0.29052070927845763
+  // Phase: -0.9621462601578072
+  var phaseArr = [];
+  for (var j = 0; j < 5; j++) {
+    phaseArr.push(Math.sin((document.body.scrollTop / 1250) + j));
+   }
+
+  var items = document.getElementsByClassName('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.left = items[i].basicLeft + 100 * phaseArr[i%5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
