@@ -15,7 +15,7 @@ Part 2: In its original incarnation the file "views/pizza.html" was not optimize
   $> cd /path/to/your-project-folder
   $> python -m SimpleHTTPServer 8080
   ```
-
+ 
 1. Open a browser and visit localhost:8080
 2. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
 
