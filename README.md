@@ -55,10 +55,12 @@ Improvement list:
    ```bash
    1. According to the https://jsperf.com/getelementsbyclassname-vs-queryselectorall/18, the getElementsByClassName is way faster than querySelectorAll.
    Consequently all instances of querySelectorAll have been replaced by  getElementsByClassName.
+   ```
 
+   ```bash
    2. The below loop is slow due to generation of the phase param each time within the lopp
 
-   var items = document.getElementsByClassName('.mover');
+    var items = document.getElementsByClassName('.mover');
      for (var i = 0; i < items.length; i++) {
        var phase = Math.sin((document.body.scrollTop / 1250) + phaseArr[i % 5]); <========= slow
        console.log("Phase: " + phase );
@@ -73,23 +75,25 @@ Improvement list:
    Phase: 0.6482082419066111
    Phase: -0.29052070927845763
    Phase: -0.9621462601578072
+   ```
+   ```bash
+   4. As the .randomPizzaContainer size and size are constants, no need to loop
+        var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[0], size);
 
-    4. As the .randomPizzaContainer size and size are constants, no need to loop
-         var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[0], size);
+     Original code
+         for (var i = 0; i < document.getElementsByClassName(".randomPizzaContainer").length; i++) {
+              var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[i], size);
+              var newwidth = (document.getElementsByClassName(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+              document.getElementsByClassName(".randomPizzaContainer")[i].style.width = newwidth;
+            }
 
-      Original code
+     Improved version
+        var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[0], size);
           for (var i = 0; i < document.getElementsByClassName(".randomPizzaContainer").length; i++) {
-               var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[i], size);
                var newwidth = (document.getElementsByClassName(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
                document.getElementsByClassName(".randomPizzaContainer")[i].style.width = newwidth;
              }
-
-      Improved version
-         var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[0], size);
-           for (var i = 0; i < document.getElementsByClassName(".randomPizzaContainer").length; i++) {
-                var newwidth = (document.getElementsByClassName(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-                document.getElementsByClassName(".randomPizzaContainer")[i].style.width = newwidth;
-              }
-
-    5. Used the translateZ and translate3d on the '.move' class in style.css to reduce painting.
-    ```
+   ```
+   ```bash
+   5. Used the translateZ and translate3d on the '.move' class in style.css to reduce painting.
+   ```
