@@ -97,6 +97,7 @@ Improvement list:
    5. Used the translateZ and translate3d on the '.move' class in style.css to reduce painting.
    ```
 
+   ```bash
    6. Use of Autoprefixer in style.css
       Addition of the backface-visibility property with the hidden in style.css, .mover class
       Restored the z-index: -1 in style.css, .mover class
@@ -117,3 +118,4 @@ Improvement list:
        var elem = document.createElement('img');
        ...
        movingPizzas.appendChild(elem);
+   ```
