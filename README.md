@@ -15,7 +15,7 @@ Part 2: In its original incarnation the file "views/pizza.html" was not optimize
   $> cd /path/to/your-project-folder
   $> python -m SimpleHTTPServer 8080
   ```
- 
+
 1. Open a browser and visit localhost:8080
 2. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
 
@@ -48,7 +48,6 @@ Improvement list:
    This reduce the picture foot print by a factor of 4 on average.
    5. Used http://www.willpeavy.com/minifier/ to minify the html
    ```
-
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
@@ -88,7 +87,7 @@ Improvement list:
             }
 
      Improved version
-        var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[0], size);
+        var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
           for (var i = 0; i < document.getElementsByClassName(".randomPizzaContainer").length; i++) {
                var newwidth = (document.getElementsByClassName(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
                document.getElementsByClassName(".randomPizzaContainer")[i].style.width = newwidth;
@@ -97,3 +96,24 @@ Improvement list:
    ```bash
    5. Used the translateZ and translate3d on the '.move' class in style.css to reduce painting.
    ```
+
+   6. Use of Autoprefixer in style.css
+      Addition of the backface-visibility property with the hidden in style.css, .mover class
+      Restored the z-index: -1 in style.css, .mover class
+
+   7.  'use strict'; tag at the top of the main.js
+
+   8. Removed all leading dot is in DOM calls, in the main.js
+
+   9. Saved array length as a variable outside of each loop, in the main.js
+
+   10. Created a local variable to save  document.getElementsByClassName('randomPizzaContainer'), in the main.js
+
+   11. Declared the pizzasDiv variable outside of the loop, in the main.js
+
+   12. The number of background pizzas  reduced to the size of the screen
+
+   13. Replace  document.querySelector("#movingPizzas1").appendChild(elem); by
+       var elem = document.createElement('img');
+       ...
+       movingPizzas.appendChild(elem);

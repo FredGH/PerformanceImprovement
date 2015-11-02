@@ -1,3 +1,5 @@
+'use strict'
+
 /*
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
 jank-free at 60 frames per second.
@@ -451,10 +453,13 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
     //As the .randomPizzaContainer size and size are constants, no need to loop
-    var dx = determineDx(document.getElementsByClassName(".randomPizzaContainer")[0], size);
-    for (var i = 0; i < document.getElementsByClassName(".randomPizzaContainer").length; i++) {
-      var newwidth = (document.getElementsByClassName(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.getElementsByClassName(".randomPizzaContainer")[i].style.width = newwidth;
+    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
+
+    //moving params outside of the loop to improve performance
+    var len = document.getElementsByClassName("randomPizzaContainer").length;
+    var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+    for (var i = 0; i < len; i++) {
+      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
     }
   }
 
@@ -470,8 +475,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+//moving param outside of the loop to improve performance
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -517,8 +523,10 @@ function updatePositions() {
     phaseArr.push(Math.sin((document.body.scrollTop / 1250) + j));
    }
 
-  var items = document.getElementsByClassName('.mover');
-  for (var i = 0; i < items.length; i++) {
+  var items = document.getElementsByClassName('mover');
+  //performance improvement
+  var len = items.length;
+  for (var i = 0; i < len; i++) {
     items[i].style.left = items[i].basicLeft + 100 * phaseArr[i%5] + 'px';
   }
 
@@ -539,15 +547,21 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
+  //calculate thepizza nb based on the screen height (rows) and the number of cols
+  var pizzaNb = screen.height * cols;
+
+  //declare the element outside of the loop
+  var elem = document.createElement('img');
+  //getElementById faster than querySelector
+  var movingPizzas = document.getElementById('movingPizzas1');
+  for (var i = 0; i < pizzaNb; i++) {
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });
