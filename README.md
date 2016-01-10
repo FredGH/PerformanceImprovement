@@ -29,8 +29,8 @@ Part 2: In its original incarnation the file "views/pizza.html" was not optimize
 Methodology:
    ```bash
    1. Open the PageSpeed site: https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgithub.com%2Fudacity%2Ffrontend-nanodegree-mobile-portfolio%2Findex.html&tab=mobile
-   2. Scan this  https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgithub.com%2FFredGH%2FPerformanceImprovements%2Findex.html
-   3. Follow the instructions relating to improvements
+   2. Scan this  https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgithub.com%2FFredGH%2FPerformanceImprovement%2Findex.html
+   3. Both Mobile and Desktop Speed are > 90%
    ```
 
 Improvement list:
