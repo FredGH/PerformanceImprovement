@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
@@ -453,11 +453,12 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
     //As the .randomPizzaContainer size and size are constants, no need to loop
-    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
+    var rdmPizza = document.getElementsByClassName("randomPizzaContainer");
+    var dx = determineDx(rdmPizza[0], size);
 
     //moving params outside of the loop to improve performance
-    var len = document.getElementsByClassName("randomPizzaContainer").length;
-    var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+    var len = rdmPizza.length;
+    var newwidth = (rdmPizza[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < len; i++) {
       document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
     }
@@ -547,14 +548,16 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  //calculate thepizza nb based on the screen height (rows) and the number of cols
-  var pizzaNb = screen.height * cols;
+  var rows = screen.height / s;
+  //calculate the pizza nb based on the screen height (rows) and the number of cols
+  var pizzaNb = rows * cols;
 
   //declare the element outside of the loop
-  var elem = document.createElement('img');
+  var elem;
   //getElementById faster than querySelector
   var movingPizzas = document.getElementById('movingPizzas1');
   for (var i = 0; i < pizzaNb; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
