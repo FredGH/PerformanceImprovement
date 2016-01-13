@@ -28,9 +28,18 @@ Part 2: In its original incarnation the file "views/pizza.html" was not optimize
 
 Methodology:
    ```bash
-   1. Open the PageSpeed site: https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgithub.com%2Fudacity%2Ffrontend-nanodegree-mobile-portfolio%2Findex.html&tab=mobile
-   2. Scan this  https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgithub.com%2FFredGH%2FPerformanceImprovement%2Findex.html
-   3. Both Mobile and Desktop Speed are > 90%
+   1. Image Size Optimisation
+      In pizza.html the image is displayed as 360 x 270.
+      The actual image is 4+ times that size.
+      I reduce the size of the image and compress it online: http://www.imageoptimizer.net/Pages/Home.aspx
+      Original Image  2048 x 1536  - 2314  KB
+      Optimized  360 x 270  - 105  KB
+   2. Google Font Optimsation.
+      http://fonts.googleapis.com/css?family=Open+Sans:400,700 points at CSS on Google.
+      I have copied that CSS and place it between style tags in the head of the index.html document to inline it.
+   3. Open the PageSpeed site: https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgithub.com%2Fudacity%2Ffrontend-nanodegree-mobile-portfolio%2Findex.html&tab=mobile
+   4. Scan this  https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgithub.com%2FFredGH%2FPerformanceImprovement%2Findex.html
+   5. Both Mobile and Desktop Speed are > 90%
    ```
 
 Improvement list:
@@ -57,7 +66,7 @@ Improvement list:
    ```
 
    ```bash
-   2. The below loop is slow due to generation of the phase param each time within the lopp
+   2. The below loop is slow due to generation of the phase param each time within the loop
 
     var items = document.getElementsByClassName('.mover');
      for (var i = 0; i < items.length; i++) {
