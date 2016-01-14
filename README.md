@@ -34,6 +34,7 @@ Methodology:
       I reduce the size of the image and compress it online: http://www.imageoptimizer.net/Pages/Home.aspx
       Original Image  2048 x 1536  - 2314  KB
       Optimized  360 x 270  - 105  KB
+      Pizza.jpg width amended from 360px to 100px
    2. Google Font Optimsation.
       http://fonts.googleapis.com/css?family=Open+Sans:400,700 points at CSS on Google.
       I have copied that CSS and place it between style tags in the head of the index.html document to inline it.
